@@ -1,0 +1,262 @@
+/* ==========================================================================
+   RESET & BASE CONFIG
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ==========================================================================
+   FUNDO GRADIENTE & OBJETOS 3D (ESTÉTICA ARANHA / AZUL, VERMELHO E PRETO)
+   ========================================================================== */
+.bg-3d-scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    /* Degradê de fundo com tom vermelho, azul vibrante e preto deep */
+    background: radial-gradient(circle at 20% 20%, #e60026 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, #0055ff 0%, transparent 45%),
+                linear-gradient(135deg, #050505 0%, #0d001a 50%, #000000 100%);
+    perspective: 1000px;
+}
+
+/* Objetos Tridimensionais Abstratos */
+.shape-3d {
+    position: absolute;
+    transform-style: preserve-3d;
+    opacity: 0.6;
+}
+
+/* Cubo 3D flutuante (Azul) */
+.cube-1 {
+    top: 15%;
+    left: 8%;
+    width: 80px;
+    height: 80px;
+    border: 3px solid #00d2ff;
+    box-shadow: 0 0 20px #00d2ff, inset 0 0 15px #0055ff;
+    transform: rotateX(45deg) rotateY(30deg) rotateZ(15deg);
+    animation: float3d 8s ease-in-out infinite alternate;
+}
+
+/* Pirâmide / Diamante (Vermelho) */
+.pyramid-1 {
+    bottom: 20%;
+    right: 10%;
+    width: 100px;
+    height: 100px;
+    border: 3px solid #ff003c;
+    box-shadow: 0 0 25px #ff003c, inset 0 0 20px #b30000;
+    transform: rotateX(60deg) rotateY(-20deg) rotateZ(45deg);
+    animation: float3d 10s ease-in-out infinite alternate-reverse;
+}
+
+/* Diamante Central */
+.diamond-1 {
+    top: 60%;
+    left: 12%;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 0, 60, 0.2);
+    border: 2px solid #ff003c;
+    box-shadow: 0 0 15px #ff003c;
+    transform: rotate(45deg) rotateX(30deg);
+    animation: float3d 7s ease-in-out infinite alternate;
+}
+
+/* Esfera / Anel 3D Azul Neon */
+.sphere-1 {
+    top: 10%;
+    right: 15%;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 4px dashed #00d2ff;
+    box-shadow: 0 0 30px #0055ff;
+    animation: spin3d 12s linear infinite;
+}
+
+/* Linhas Estilo Teia (Spider Web lines) */
+.web-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.4), rgba(0, 210, 255, 0.4), transparent);
+    height: 2px;
+    width: 100%;
+}
+
+.line-1 {
+    top: 25%;
+    transform: rotate(-15deg);
+}
+
+.line-2 {
+    bottom: 30%;
+    transform: rotate(10deg);
+}
+
+/* Animações Flutuantes */
+@keyframes float3d {
+    0% {
+        transform: translateY(0) rotateX(45deg) rotateY(30deg);
+    }
+    100% {
+        transform: translateY(-30px) rotateX(60deg) rotateY(50deg);
+    }
+}
+
+@keyframes spin3d {
+    0% {
+        transform: rotate(0deg) rotateX(30deg);
+    }
+    100% {
+        transform: rotate(360deg) rotateX(30deg);
+    }
+}
+
+/* ==========================================================================
+   ESTRUTURA & CONTEÚDO
+   ========================================================================== */
+.wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Header */
+.main-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff003c, #ffffff, #00d2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 0, 60, 0.6);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #cccccc;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid de Cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* ==========================================================================
+   CARDS & EFEITO MODAL / HOVER
+   ========================================================================== */
+.card {
+    background: rgba(10, 10, 15, 0.75);
+    border-radius: 16px;
+    padding: 2px; /* Borda gradiente dinâmica */
+    background-image: linear-gradient(135deg, rgba(255, 0, 60, 0.4), rgba(0, 85, 255, 0.4));
+    backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+}
+
+.card-inner {
+    background: #0a0a0c;
+    border-radius: 14px;
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff003c;
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+.tips-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tips-list li {
+    font-size: 0.95rem;
+    color: #dddddd;
+    line-height: 1.5;
+}
+
+.tips-list strong {
+    color: #00d2ff;
+}
+
+/* --- Efeito Modal/Destaque no Mouse Over --- */
+.card:hover {
+    transform: scale(1.08) translateY(-10px);
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(255, 0, 60, 0.4), 
+                0 0 30px rgba(0, 210, 255, 0.5);
+    background-image: linear-gradient(135deg, #ff003c, #00d2ff);
+}
+
+.card:hover h2 {
+    border-bottom-color: #00d2ff;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.main-footer {
+    text-align: center;
+    margin-top: 60px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #888888;
+    font-size: 0.85rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.1rem;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
